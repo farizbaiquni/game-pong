@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    public int counter = 30;
+
+    public GameObject WinPlayer1;
+    public GameObject WinPlayer2;
+    public GameObject Seri;
+
+    public int counter = 2;
 
     public Text timerText;
 
@@ -28,8 +33,15 @@ public class TimerScript : MonoBehaviour
             timerText.text = counter.ToString();
 
         }   
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
+        
+        if(SkorScript.instance.skorPlayer1 > SkorScript.instance.skorPlayer2){
+            WinPlayer1.SetActive(true);
+        } else if(SkorScript.instance.skorPlayer2 > SkorScript.instance.skorPlayer1){
+            WinPlayer2.SetActive(true);
+        } else {
+            Seri.SetActive(true);;
+        
+    }
    
     }
 }

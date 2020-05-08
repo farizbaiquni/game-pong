@@ -8,6 +8,7 @@ public class ballscript : MonoBehaviour
     int speed;
     public Rigidbody2D sesuatu;
     public Animator animator;
+    public AudioSource hitSound;
 
     // Start is called before the first frame update
     void Start(){
@@ -28,9 +29,19 @@ public class ballscript : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other){
-    	if(other.collider.name == "WallVertical-Kiri" || other.collider.name == "WallVertical-Kanan"){
+    	if(other.collider.name == "WallVertical-Kiri"){
+            SkorScript.instance.TambahSkorPLayer2();
             StartCoroutine(Jeda());
     	}
+
+        if(other.collider.name == "WallVertical-Kanan"){
+            SkorScript.instance.TambahSkorPLayer1();
+            StartCoroutine(Jeda());
+        }
+
+        if(other.collider.tag == "RaketKanan" || other.collider.tag == "RaketKiri" ){
+            hitSound.Play();
+        }
     }
 
     IEnumerator Jeda(){
